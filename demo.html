@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAM System Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e8e8e8;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #a8a8a8;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            color: #e8e8e8;
+            padding: 15px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        
+        button {
+            background: #00d4ff;
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        
+        button:hover {
+            background: #00b8e6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+        
+        button:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .results {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+        }
+        
+        .score-display {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .score-value {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .score-low { color: #2ecc71; }
+        .score-medium { color: #f39c12; }
+        .score-high { color: #e74c3c; }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .metric {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: #a8a8a8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-top: 5px;
+        }
+        
+        .text-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .text-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .text-box h3 {
+            font-size: 14px;
+            color: #a8a8a8;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .examples {
+            margin-top: 15px;
+        }
+        
+        .example-btn {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .example-btn:hover {
+            background: rgba(0, 212, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦫 DAM System Demo</h1>
+            <p class="subtitle">Cognitive Firewall API Demonstration</p>
+        </header>
+        
+        <div class="demo-section">
+            <h2>Text Analysis</h2>
+            <p style="margin: 15px 0; color: #a8a8a8;">Enter text to analyze for distraction score and hyperbole detection:</p>
+            
+            <div class="examples">
+                <strong style="color: #a8a8a8; display: block; margin-bottom: 10px;">Try these examples:</strong>
+                <button class="example-btn" onclick="loadExample('factual')">Factual News</button>
+                <button class="example-btn" onclick="loadExample('hyperbolic')">Hyperbolic Text</button>
+                <button class="example-btn" onclick="loadExample('sensational')">Sensational</button>
+            </div>
+            
+            <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+            <button onclick="analyzeText()">Analyze Text</button>
+            
+            <div id="results" class="results">
+                <div class="score-display">
+                    <div class="metric-label">Distraction Score</div>
+                    <div id="score" class="score-value">--</div>
+                </div>
+                
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-label">Sentiment</div>
+                        <div class="metric-value" id="sentiment">--</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Subjectivity</div>
+                        <div class="metric-value" id="subjectivity">--</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Adjectives</div>
+                        <div class="metric-value" id="adjectives">--</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Hyperbole</div>
+                        <div class="metric-value" id="hyperbole">--</div>
+                    </div>
+                </div>
+                
+                <div class="text-comparison">
+                    <div class="text-box">
+                        <h3>Original Text</h3>
+                        <p id="originalText"></p>
+                    </div>
+                    <div class="text-box">
+                        <h3>De-Painted Text</h3>
+                        <p id="depaintedText"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        
+        const examples = {
+            factual: 'The company reported quarterly earnings today. Revenue increased by 5 percent compared to last year. The board announced a dividend of $0.50 per share.',
+            hyperbolic: 'This absolutely incredible and revolutionary breakthrough is totally amazing and wonderful! The extremely impressive results are simply mind-blowing and utterly spectacular!',
+            sensational: 'BREAKING: Shocking revelation completely destroys previous assumptions! Absolutely devastating findings reveal stunning truth that will blow your mind!'
+        };
+        
+        function loadExample(type) {
+            document.getElementById('inputText').value = examples[type];
+        }
+        
+        async function analyzeText() {
+            const text = document.getElementById('inputText').value;
+            const resultsDiv = document.getElementById('results');
+            const errorDiv = document.getElementById('error');
+            
+            if (!text.trim()) {
+                showError('Please enter some text to analyze');
+                return;
+            }
+            
+            errorDiv.style.display = 'none';
+            resultsDiv.classList.remove('show');
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/analyze`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+                
+                const data = await response.json();
+                displayResults(data);
+            } catch (error) {
+                showError('Failed to connect to API. Make sure the backend is running on localhost:8000');
+            }
+        }
+        
+        function displayResults(data) {
+            const scoreValue = (data.distraction_score * 100).toFixed(0);
+            const scoreElement = document.getElementById('score');
+            
+            scoreElement.textContent = scoreValue + '%';
+            scoreElement.className = 'score-value';
+            
+            if (data.distraction_score > 0.7) {
+                scoreElement.classList.add('score-high');
+            } else if (data.distraction_score > 0.4) {
+                scoreElement.classList.add('score-medium');
+            } else {
+                scoreElement.classList.add('score-low');
+            }
+            
+            document.getElementById('sentiment').textContent = data.sentiment_polarity.toFixed(2);
+            document.getElementById('subjectivity').textContent = data.sentiment_subjectivity.toFixed(2);
+            document.getElementById('adjectives').textContent = data.adjective_count;
+            document.getElementById('hyperbole').textContent = (data.topical_divergence * 100).toFixed(0) + '%';
+            
+            document.getElementById('originalText').textContent = data.original_text;
+            document.getElementById('depaintedText').textContent = data.de_painted_text;
+            
+            document.getElementById('results').classList.add('show');
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+        
+        // Allow Enter key to submit (with Shift+Enter for new line)
+        document.getElementById('inputText').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                analyzeText();
+            }
+        });
+    </script>
+</body>
+</html>

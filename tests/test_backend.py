@@ -9,9 +9,12 @@ import os
 # Add backend to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'backend'))
 
-from main import app, calculate_sentiment_spike, calculate_topical_divergence, de_painter
+from main import app, calculate_sentiment_spike, calculate_topical_divergence, de_painter, nlp
 
 client = TestClient(app)
+
+# Check if Spacy model is available
+SPACY_MODEL_AVAILABLE = nlp is not None
 
 
 class TestBasicEndpoints:
@@ -60,7 +63,7 @@ class TestSentimentAnalysis:
 class TestDePainter:
     """Test de-painter functionality"""
     
-    @pytest.mark.skipif(True, reason="Requires spacy model installation")
+    @pytest.mark.skipif(not SPACY_MODEL_AVAILABLE, reason="Requires spacy model installation")
     def test_depaint_removes_adjectives(self):
         """Test that de-painter removes adjectives"""
         text = "The quick brown fox jumps."
@@ -72,7 +75,7 @@ class TestDePainter:
         assert "fox" in depainted
         assert "jumps" in depainted
         
-    @pytest.mark.skipif(True, reason="Requires spacy model installation")
+    @pytest.mark.skipif(not SPACY_MODEL_AVAILABLE, reason="Requires spacy model installation")
     def test_depaint_returns_removed_list(self):
         """Test that de-painter returns list of removed words"""
         text = "The very big dog is extremely happy."
@@ -86,7 +89,7 @@ class TestDePainter:
 class TestAnalyzeEndpoint:
     """Test /api/analyze endpoint"""
     
-    @pytest.mark.skipif(True, reason="Requires spacy model installation")
+    @pytest.mark.skipif(not SPACY_MODEL_AVAILABLE, reason="Requires spacy model installation")
     def test_analyze_basic_text(self):
         """Test analyzing basic text"""
         response = client.post(
@@ -112,7 +115,7 @@ class TestAnalyzeEndpoint:
         # Distraction score should be between 0 and 1
         assert 0 <= data["distraction_score"] <= 1
         
-    @pytest.mark.skipif(True, reason="Requires spacy model installation")
+    @pytest.mark.skipif(not SPACY_MODEL_AVAILABLE, reason="Requires spacy model installation")
     def test_analyze_hyperbolic_text(self):
         """Test analyzing hyperbolic text"""
         response = client.post(
@@ -147,7 +150,7 @@ class TestAnalyzeEndpoint:
 class TestDePaintEndpoint:
     """Test /api/depaint endpoint"""
     
-    @pytest.mark.skipif(True, reason="Requires spacy model installation")
+    @pytest.mark.skipif(not SPACY_MODEL_AVAILABLE, reason="Requires spacy model installation")
     def test_depaint_basic_text(self):
         """Test de-painting basic text"""
         response = client.post(
