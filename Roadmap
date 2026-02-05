@@ -1,0 +1,23 @@
+🗺️ DAM System: Technical Roadmap
+📍 Level 1: The Foundation (Current State)
+• Goal: Get the "Brain" and the "Shield" talking to each other.
+• Tasks:
+• [ ] Connect API: Ensure the extension sends text to the Python backend.
+• [ ] CORS Setup: Fix the "security wall" in app.py so the browser doesn't block your extension.
+• [ ] Basic HUD: Display the "Distraction Score" in a small box on the corner of news sites.
+📍 Level 2: The "De-Painter" (Next Up)
+• Goal: Physically strip the emotional "paint" from the news.
+• Tasks:
+• [ ] NLP Adjective Stripper: Enhance brain.py to identify and return a list of "trigger words" to the extension.
+• [ ] The "Sober Mode" Toggle: Create a button in the HUD that blurs out these words in real-time.
+• [ ] Primary Source Finder: Have the AI scan the page for links to .gov sites, PDFs, or court documents and highlight them in green.
+📍 Level 3: The "Dead Cat" Detector (Advanced)
+• Goal: Detect if a story is a distraction from bigger news.
+• Tasks:
+• [ ] Dry News Feed: Write a script that pulls the top 5 "boring but important" headlines from Reuters or AP News every hour.
+• [ ] The Divergence Check: Compare the current "viral" story against the "Dry News." If there’s zero overlap, the Distraction Score goes up.
+📍 Level 4: Community Shield (Final Boss)
+• Goal: Let users help each other stay sane.
+• Tasks:
+• [ ] "Flag a Flood" Button: Let users manually report if they think a story is "zone flooding."
+• [ ] Global Alert: If 100 people flag a story, show a warning to everyone else using the extension: "Caution: High Noise Level Detected."
