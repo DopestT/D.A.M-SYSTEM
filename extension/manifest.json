@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "DAM Cognitive Firewall",
+  "version": "1.0.0",
+  "description": "Neutralize 'Flood the Zone' media tactics with real-time Distraction Scores and hyperbole suppression",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "*://*.news.com/*",
+    "*://*.cnn.com/*",
+    "*://*.foxnews.com/*",
+    "*://*.bbc.com/*",
+    "*://*.nytimes.com/*",
+    "*://*.washingtonpost.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.news.com/*",
+        "*://*.cnn.com/*",
+        "*://*.foxnews.com/*",
+        "*://*.bbc.com/*",
+        "*://*.nytimes.com/*",
+        "*://*.washingtonpost.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

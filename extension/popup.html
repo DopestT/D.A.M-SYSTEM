@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>DAM Cognitive Firewall</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-width: 320px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dam-popup">
+    <div class="dam-popup-header">
+      <h1 class="dam-popup-title">🦫 DAM System</h1>
+      <p class="dam-popup-subtitle">Cognitive Firewall</p>
+    </div>
+
+    <div class="dam-popup-controls">
+      <div class="dam-control">
+        <span class="dam-control-label">HUD Overlay</span>
+        <label class="dam-toggle">
+          <input type="checkbox" id="hud-toggle" checked>
+          <span class="dam-toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="dam-control">
+        <span class="dam-control-label">Sober Mode</span>
+        <label class="dam-toggle">
+          <input type="checkbox" id="sober-toggle">
+          <span class="dam-toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="dam-footer">
+      <p>Neutralizing "Flood the Zone" tactics</p>
+      <p>Backend: <span id="backend-status">Checking...</span></p>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
