@@ -17,7 +17,11 @@ app = FastAPI(
 # Configure CORS for browser extension
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, restrict to specific origins
+    allow_origins=[
+        "chrome-extension://*",
+        "http://localhost:*",
+        "http://127.0.0.1:*"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

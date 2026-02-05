@@ -3,7 +3,7 @@ NLP Logic for D.A.M-SYSTEM
 Calculates distraction scores based on sentiment and subjectivity analysis.
 """
 from textblob import TextBlob
-from typing import Dict
+from typing import Dict, Any
 
 
 def calculate_distraction_score(text: str) -> Dict[str, float]:
@@ -55,7 +55,7 @@ def calculate_distraction_score(text: str) -> Dict[str, float]:
     }
 
 
-def analyze_hyperbole(text: str) -> Dict[str, any]:
+def analyze_hyperbole(text: str) -> Dict[str, Any]:
     """
     Identify potential hyperbolic language in text.
     
@@ -80,7 +80,7 @@ def analyze_hyperbole(text: str) -> Dict[str, any]:
     }
 
 
-def extract_primary_sources(text: str) -> Dict[str, any]:
+def extract_primary_sources(text: str) -> Dict[str, Any]:
     """
     Extract and identify primary sources from text.
     

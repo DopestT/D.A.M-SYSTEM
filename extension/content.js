@@ -39,7 +39,7 @@ function createHUD() {
   hudElement.className = 'dam-hud';
   hudElement.innerHTML = `
     <div class="dam-hud-header">
-      <span class="dam-hud-icon">🦫🛡️</span>
+      <span class="dam-hud-icon" aria-label="D.A.M-SYSTEM Shield">🦫🛡️</span>
       <span class="dam-hud-title">D.A.M-SYSTEM</span>
       <button class="dam-hud-close" id="dam-close-btn">×</button>
     </div>
