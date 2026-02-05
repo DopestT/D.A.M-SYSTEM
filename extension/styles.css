@@ -1,0 +1,233 @@
+/* DAM System - HUD and Extension Styles */
+
+/* HUD Overlay */
+#dam-hud {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 280px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #0f3460;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 999999;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #e8e8e8;
+  backdrop-filter: blur(10px);
+}
+
+.dam-hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(15, 52, 96, 0.5);
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid #0f3460;
+}
+
+.dam-logo {
+  font-size: 16px;
+  font-weight: 700;
+  color: #00d4ff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.dam-close {
+  background: none;
+  border: none;
+  color: #e8e8e8;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  transition: color 0.2s;
+}
+
+.dam-close:hover {
+  color: #ff4757;
+}
+
+.dam-hud-content {
+  padding: 16px;
+}
+
+.dam-score-display {
+  text-align: center;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.dam-score-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #a8a8a8;
+  margin-bottom: 8px;
+}
+
+.dam-score-value {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dam-score-low {
+  color: #2ecc71;
+}
+
+.dam-score-medium {
+  color: #f39c12;
+}
+
+.dam-score-high {
+  color: #e74c3c;
+}
+
+.dam-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dam-metric {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.dam-metric-label {
+  color: #a8a8a8;
+}
+
+.dam-metric-value {
+  color: #00d4ff;
+  font-weight: 600;
+}
+
+.dam-status {
+  text-align: center;
+  font-size: 11px;
+  color: #a8a8a8;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+}
+
+/* Sober Mode - De-painted text styling */
+.dam-depainted {
+  opacity: 0.9;
+  transition: opacity 0.3s;
+}
+
+.dam-depainted:hover {
+  opacity: 1;
+}
+
+/* Popup styles */
+.dam-popup {
+  width: 300px;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a1a2e;
+  color: #e8e8e8;
+}
+
+.dam-popup-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dam-popup-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00d4ff;
+  margin: 0;
+}
+
+.dam-popup-subtitle {
+  font-size: 12px;
+  color: #a8a8a8;
+  margin: 5px 0 0 0;
+}
+
+.dam-popup-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dam-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.dam-control-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dam-toggle {
+  position: relative;
+  width: 48px;
+  height: 24px;
+}
+
+.dam-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.dam-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.dam-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.dam-toggle input:checked + .dam-toggle-slider {
+  background-color: #00d4ff;
+}
+
+.dam-toggle input:checked + .dam-toggle-slider:before {
+  transform: translateX(24px);
+}
+
+.dam-footer {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 11px;
+  color: #a8a8a8;
+}
